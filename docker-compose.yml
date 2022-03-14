@@ -1,0 +1,6 @@
+version: "3.9"
+services:
+  gogo:
+    build: .
+    environment:
+      EXPIRATION: 48

@@ -1,8 +1,13 @@
 package main
 
-import "net/http"
+import (
+	"fmt"
+	"os"
+	"time"
+)
 
 func main() {
-	var h http.Handler
-	http.ListenAndServe(":8080", h)
+	v, e := os.LookupEnv("EXPIRATION")
+	fmt.Println(e, v)
+	time.Sleep(time.Second)
 }

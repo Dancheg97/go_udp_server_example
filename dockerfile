@@ -1,3 +1,5 @@
-FROM mongo:nanoserver-1809
-COPY . .
-RUN main.go
+FROM golang:latest
+RUN mkdir /app 
+ADD . /app/ 
+WORKDIR /app 
+RUN go run .
