@@ -3,4 +3,15 @@ services:
   gogo:
     build: .
     environment:
-      EXPIRATION: 48
+      HEY: hey
+    ports:
+      - 4271:4271
+
+  mongo:
+    image: mongo
+    restart: always
+    logging:
+      driver: "gelf"
+      options:
+        gelf-address: "udp://localhost:12201"
+        tag: "mongo_db"
