@@ -20,3 +20,23 @@ LemonLog supports logs from many different technologies and automatically prepar
 
 Also it is easy to set email notifications using lemon-log, additional http requests by triggers can be added aswell.
 
+# Search
+
+You can store input data in json format, which can then bequeried in underlying mongo database using simlpe for human understanding queries. Data, that can be queried is automatically filtered by tags and levels and can contain additional query field to search by other parameters.
+
+# Visualize
+
+You can set custom made visualizations in lemonlog, that are powered by [fl_chart](https://pub.dev/packages/fl_chart) flutter package. Also a lot of technologies are automatically recognized by logger, and you don't have to manually setup the chart for them - they are working out of the box.
+
+# Alert
+
+Lemonlog supports executing http requests on alters, which allows to connect different forms of alertions:
+- email
+- sms-services
+- messangers
+- api actions
+
+# Deploy
+
+All settings can be configured as environment variables on app launch, so that there is no need for manual clicks inside the logger itself.
+
