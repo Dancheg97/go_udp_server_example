@@ -2,30 +2,27 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"net"
+	"net/http"
 )
 
-func main() {
-	pc, err := net.ListenPacket("udp", ":4271")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer pc.Close()
+func hello(w http.ResponseWriter, req *http.Request) {
 
-	for {
-		buf := make([]byte, 1024)
-		n, addr, err := pc.ReadFrom(buf)
-		if err != nil {
-			continue
+	fmt.Fprintf(w, "hello\n")
+}
+
+func headers(w http.ResponseWriter, req *http.Request) {
+
+	for name, headers := range req.Header {
+		for _, h := range headers {
+			fmt.Fprintf(w, "%v: %v\n", name, h)
 		}
-		go serve(pc, addr, buf[:n])
 	}
 }
 
-func serve(pc net.PacketConn, addr net.Addr, buf []byte) {
-	buf[2] |= 0x80
-	pc.WriteTo(buf, addr)
+func main() {
 
-	fmt.Println(buf)
+	http.HandleFunc("/hello", hello)
+	http.HandleFunc("/headers", headers)
+
+	http.ListenAndServe(":8090", nil)
 }
